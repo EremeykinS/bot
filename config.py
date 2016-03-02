@@ -7,4 +7,6 @@ port = 8080
 token = 'xxx'
 
 # Yandex
-client_id = 'yyy'
+client_id = "yyy"
+
+redirect_uri = "http://127.0.0.1"

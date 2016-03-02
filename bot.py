@@ -3,11 +3,9 @@ import config
 
 
 class Bot(telebot.TeleBot):
-    def __init__(self):
+    def __init__(self, queue):
         telebot.TeleBot.__init__(self, config.token)
-        self.run()
 
-    def run(self):
         # keyboard markup
         markup = telebot.types.ReplyKeyboardMarkup()
         markup.row('/start', '/help')
@@ -24,6 +22,14 @@ class Bot(telebot.TeleBot):
                 ans = "Here is no manual! Who need boring manuals?"
             self.send_message(message.from_user.id, ans, reply_markup=markup)
             print('Отправлено сообщение: \'', ans, '\' пользователю ', message.from_user.first_name, '(', message.from_user.id, ')')
+
+        # wait for POST
+        @self.message_handler(commands=['post'])
+        def wait_POST(message):
+            queue.put(message.from_user.id)
+            self.send_message(message.from_user.id, 'Waiting for POST...')
+            item = queue.get()
+            self.send_message(message.from_user.id, 'We received it:\'' + str(item) + '\'!')
 
         # answer
         @self.message_handler(content_types=['text'])

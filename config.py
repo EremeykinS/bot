@@ -1,7 +1,7 @@
 # common
-machine = 'local machine'
-hostname = "localhost"
-port = 8080
+machine = 'Server'
+hostname = "95.163.114.6"
+port = 80
 
 # telegram token
 token = 'xxx'
@@ -9,4 +9,4 @@ token = 'xxx'
 # Yandex
 client_id = "yyy"
 
-redirect_uri = "http://127.0.0.1"
+redirect_uri = "http://95.163.114.6"
